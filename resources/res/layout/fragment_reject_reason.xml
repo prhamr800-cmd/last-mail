@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.digikala.dms.view.custom.XeiTextView
+        android:textSize="16sp"
+        android:textColor="@color/grey_600"
+        android:gravity="start"
+        android:layout_gravity="start"
+        android:background="@color/grey_200"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="دلیل عدم تحویل"/>
+    <ListView
+        android:layout_gravity="end"
+        android:id="@+id/reject_reason_list_view"
+        android:padding="8dp"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:divider="@null"
+        android:layout_weight="1"
+        android:layoutDirection="rtl"/>
+    <com.digikala.dms.view.custom.XeiTextView
+        android:textSize="18sp"
+        android:textColor="#d32f2f"
+        android:gravity="end"
+        android:layout_gravity="end"
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="انصراف"/>
+</LinearLayout>

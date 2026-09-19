@@ -1,0 +1,78 @@
+###### Class com.afollestad.materialdialogs.internal.AllCapsTransformationMethod (com.afollestad.materialdialogs.internal.AllCapsTransformationMethod)
+.class Lcom/afollestad/materialdialogs/internal/AllCapsTransformationMethod;
+.super Ljava/lang/Object;
+.source "AllCapsTransformationMethod.java"
+
+# interfaces
+.implements Landroid/text/method/TransformationMethod;
+
+
+# instance fields
+.field private mLocale:Ljava/util/Locale;
+
+
+# direct methods
+.method constructor <init>(Landroid/content/Context;)V
+    .registers 3
+    .param p1, "context"    # Landroid/content/Context;
+
+    .line 13
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    .line 14
+    invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration;
+
+    move-result-object v0
+
+    iget-object v0, v0, Landroid/content/res/Configuration;->locale:Ljava/util/Locale;
+
+    iput-object v0, p0, Lcom/afollestad/materialdialogs/internal/AllCapsTransformationMethod;->mLocale:Ljava/util/Locale;
+
+    .line 15
+    return-void
+.end method
+
+
+# virtual methods
+.method public getTransformation(Ljava/lang/CharSequence;Landroid/view/View;)Ljava/lang/CharSequence;
+    .registers 5
+    .param p1, "source"    # Ljava/lang/CharSequence;
+    .param p2, "view"    # Landroid/view/View;
+
+    .line 19
+    if-eqz p1, :cond_d
+
+    invoke-interface {p1}, Ljava/lang/CharSequence;->toString()Ljava/lang/String;
+
+    move-result-object v0
+
+    iget-object v1, p0, Lcom/afollestad/materialdialogs/internal/AllCapsTransformationMethod;->mLocale:Ljava/util/Locale;
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->toUpperCase(Ljava/util/Locale;)Ljava/lang/String;
+
+    move-result-object v0
+
+    goto :goto_e
+
+    :cond_d
+    const/4 v0, 0x0
+
+    :goto_e
+    return-object v0
+.end method
+
+.method public onFocusChanged(Landroid/view/View;Ljava/lang/CharSequence;ZILandroid/graphics/Rect;)V
+    .registers 6
+    .param p1, "view"    # Landroid/view/View;
+    .param p2, "sourceText"    # Ljava/lang/CharSequence;
+    .param p3, "focused"    # Z
+    .param p4, "direction"    # I
+    .param p5, "previouslyFocusedRect"    # Landroid/graphics/Rect;
+
+    .line 28
+    return-void
+.end method

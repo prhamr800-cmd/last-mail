@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.digikala.dms.view.custom.XeiTextView
+        android:textSize="16sp"
+        android:textColor="@color/grey_600"
+        android:gravity="start"
+        android:layout_gravity="start"
+        android:background="@color/grey_200"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="تعداد کالای مرجوع شده"/>
+    <com.digikala.dms.view.custom.NumberPicker
+        android:textSize="56sp"
+        android:gravity="center"
+        android:id="@+id/itemCount"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"/>
+    <com.digikala.dms.view.custom.XeiTextView
+        android:textSize="22sp"
+        android:textColor="@color/green_500"
+        android:id="@+id/confirm_button"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/partial_confirm"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

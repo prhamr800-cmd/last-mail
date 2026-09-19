@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/grey_200"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:background="@color/grey_400"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <com.digikala.dms.view.custom.XeiTextView
+        android:textColor="@color/grey_700"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/row_basketHeader"
+        android:background="@color/zxing_transparent"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="22"/>
+    <View
+        android:background="@color/grey_400"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+</LinearLayout>

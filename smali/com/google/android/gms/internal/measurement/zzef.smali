@@ -1,0 +1,16 @@
+###### Class com.google.android.gms.internal.measurement.zzef (com.google.android.gms.internal.measurement.zzef)
+.class public interface abstract Lcom/google/android/gms/internal/measurement/zzef;
+.super Ljava/lang/Object;
+
+# interfaces
+.implements Landroid/os/IInterface;
+
+
+# virtual methods
+.method public abstract zzb(Landroid/os/Bundle;)V
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Landroid/os/RemoteException;
+        }
+    .end annotation
+.end method

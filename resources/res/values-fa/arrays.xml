@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="language_key_array">
+        <item>en</item>
+        <item>fa</item>
+    </array>
+    <array name="language_title_array">
+        <item>انگلیسی</item>
+        <item>فارسی</item>
+    </array>
+    <array name="priority_tab_name">
+        <item>الویت تحویل</item>
+        <item>همه سفارشات</item>
+    </array>
+</resources>

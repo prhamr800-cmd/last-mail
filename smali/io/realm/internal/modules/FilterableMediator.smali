@@ -1,0 +1,717 @@
+###### Class io.realm.internal.modules.FilterableMediator (io.realm.internal.modules.FilterableMediator)
+.class public Lio/realm/internal/modules/FilterableMediator;
+.super Lio/realm/internal/RealmProxyMediator;
+.source "FilterableMediator.java"
+
+
+# instance fields
+.field private final allowedClasses:Ljava/util/Set;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/util/Set<",
+            "Ljava/lang/Class<",
+            "+",
+            "Lio/realm/RealmModel;",
+            ">;>;"
+        }
+    .end annotation
+.end field
+
+.field private final originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+
+# direct methods
+.method public constructor <init>(Lio/realm/internal/RealmProxyMediator;Ljava/util/Collection;)V
+    .registers 8
+    .param p1, "originalMediator"    # Lio/realm/internal/RealmProxyMediator;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lio/realm/internal/RealmProxyMediator;",
+            "Ljava/util/Collection<",
+            "Ljava/lang/Class<",
+            "+",
+            "Lio/realm/RealmModel;",
+            ">;>;)V"
+        }
+    .end annotation
+
+    .line 59
+    .local p2, "allowedClasses":Ljava/util/Collection;, "Ljava/util/Collection<Ljava/lang/Class<+Lio/realm/RealmModel;>;>;"
+    invoke-direct {p0}, Lio/realm/internal/RealmProxyMediator;-><init>()V
+
+    .line 60
+    iput-object p1, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    .line 62
+    new-instance v0, Ljava/util/HashSet;
+
+    invoke-direct {v0}, Ljava/util/HashSet;-><init>()V
+
+    .line 64
+    .local v0, "tempAllowedClasses":Ljava/util/Set;, "Ljava/util/Set<Ljava/lang/Class<+Lio/realm/RealmModel;>;>;"
+    if-eqz p1, :cond_2a
+
+    .line 65
+    invoke-virtual {p1}, Lio/realm/internal/RealmProxyMediator;->getModelClasses()Ljava/util/Set;
+
+    move-result-object v1
+
+    .line 66
+    .local v1, "originalClasses":Ljava/util/Set;, "Ljava/util/Set<Ljava/lang/Class<+Lio/realm/RealmModel;>;>;"
+    invoke-interface {p2}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+
+    move-result-object v2
+
+    :goto_14
+    invoke-interface {v2}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v3
+
+    if-eqz v3, :cond_2a
+
+    invoke-interface {v2}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v3
+
+    check-cast v3, Ljava/lang/Class;
+
+    .line 67
+    .local v3, "clazz":Ljava/lang/Class;, "Ljava/lang/Class<+Lio/realm/RealmModel;>;"
+    invoke-interface {v1, v3}, Ljava/util/Set;->contains(Ljava/lang/Object;)Z
+
+    move-result v4
+
+    if-eqz v4, :cond_29
+
+    .line 68
+    invoke-interface {v0, v3}, Ljava/util/Set;->add(Ljava/lang/Object;)Z
+
+    .line 70
+    .end local v3    # "clazz":Ljava/lang/Class;, "Ljava/lang/Class<+Lio/realm/RealmModel;>;"
+    :cond_29
+    goto :goto_14
+
+    .line 72
+    .end local v1    # "originalClasses":Ljava/util/Set;, "Ljava/util/Set<Ljava/lang/Class<+Lio/realm/RealmModel;>;>;"
+    :cond_2a
+    invoke-static {v0}, Ljava/util/Collections;->unmodifiableSet(Ljava/util/Set;)Ljava/util/Set;
+
+    move-result-object v1
+
+    iput-object v1, p0, Lio/realm/internal/modules/FilterableMediator;->allowedClasses:Ljava/util/Set;
+
+    .line 73
+    return-void
+.end method
+
+.method private checkSchemaHasClass(Ljava/lang/Class;)V
+    .registers 5
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/Class<",
+            "+",
+            "Lio/realm/RealmModel;",
+            ">;)V"
+        }
+    .end annotation
+
+    .line 175
+    .local p1, "clazz":Ljava/lang/Class;, "Ljava/lang/Class<+Lio/realm/RealmModel;>;"
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->allowedClasses:Ljava/util/Set;
+
+    invoke-interface {v0, p1}, Ljava/util/Set;->contains(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_9
+
+    .line 178
+    return-void
+
+    .line 176
+    :cond_9
+    new-instance v0, Ljava/lang/IllegalArgumentException;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {p1}, Ljava/lang/Class;->getSimpleName()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    const-string v2, " is not part of the schema for this Realm"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
+
+    throw v0
+.end method
+
+
+# virtual methods
+.method public copyOrUpdate(Lio/realm/Realm;Lio/realm/RealmModel;ZLjava/util/Map;)Lio/realm/RealmModel;
+    .registers 6
+    .param p1, "realm"    # Lio/realm/Realm;
+    .param p3, "update"    # Z
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<E::",
+            "Lio/realm/RealmModel;",
+            ">(",
+            "Lio/realm/Realm;",
+            "TE;Z",
+            "Ljava/util/Map<",
+            "Lio/realm/RealmModel;",
+            "Lio/realm/internal/RealmObjectProxy;",
+            ">;)TE;"
+        }
+    .end annotation
+
+    .line 118
+    .local p2, "object":Lio/realm/RealmModel;, "TE;"
+    .local p4, "cache":Ljava/util/Map;, "Ljava/util/Map<Lio/realm/RealmModel;Lio/realm/internal/RealmObjectProxy;>;"
+    invoke-virtual {p2}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lio/realm/internal/Util;->getOriginalModelClass(Ljava/lang/Class;)Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-direct {p0, v0}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 119
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1, p2, p3, p4}, Lio/realm/internal/RealmProxyMediator;->copyOrUpdate(Lio/realm/Realm;Lio/realm/RealmModel;ZLjava/util/Map;)Lio/realm/RealmModel;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public createColumnInfo(Ljava/lang/Class;Lio/realm/internal/OsSchemaInfo;)Lio/realm/internal/ColumnInfo;
+    .registers 4
+    .param p2, "osSchemaInfo"    # Lio/realm/internal/OsSchemaInfo;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/Class<",
+            "+",
+            "Lio/realm/RealmModel;",
+            ">;",
+            "Lio/realm/internal/OsSchemaInfo;",
+            ")",
+            "Lio/realm/internal/ColumnInfo;"
+        }
+    .end annotation
+
+    .line 90
+    .local p1, "clazz":Ljava/lang/Class;, "Ljava/lang/Class<+Lio/realm/RealmModel;>;"
+    invoke-direct {p0, p1}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 91
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1, p2}, Lio/realm/internal/RealmProxyMediator;->createColumnInfo(Ljava/lang/Class;Lio/realm/internal/OsSchemaInfo;)Lio/realm/internal/ColumnInfo;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public createDetachedCopy(Lio/realm/RealmModel;ILjava/util/Map;)Lio/realm/RealmModel;
+    .registers 5
+    .param p2, "maxDepth"    # I
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<E::",
+            "Lio/realm/RealmModel;",
+            ">(TE;I",
+            "Ljava/util/Map<",
+            "Lio/realm/RealmModel;",
+            "Lio/realm/internal/RealmObjectProxy$CacheData<",
+            "Lio/realm/RealmModel;",
+            ">;>;)TE;"
+        }
+    .end annotation
+
+    .line 160
+    .local p1, "realmObject":Lio/realm/RealmModel;, "TE;"
+    .local p3, "cache":Ljava/util/Map;, "Ljava/util/Map<Lio/realm/RealmModel;Lio/realm/internal/RealmObjectProxy$CacheData<Lio/realm/RealmModel;>;>;"
+    invoke-virtual {p1}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lio/realm/internal/Util;->getOriginalModelClass(Ljava/lang/Class;)Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-direct {p0, v0}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 161
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1, p2, p3}, Lio/realm/internal/RealmProxyMediator;->createDetachedCopy(Lio/realm/RealmModel;ILjava/util/Map;)Lio/realm/RealmModel;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public createOrUpdateUsingJsonObject(Ljava/lang/Class;Lio/realm/Realm;Lorg/json/JSONObject;Z)Lio/realm/RealmModel;
+    .registers 6
+    .param p2, "realm"    # Lio/realm/Realm;
+    .param p3, "json"    # Lorg/json/JSONObject;
+    .param p4, "update"    # Z
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<E::",
+            "Lio/realm/RealmModel;",
+            ">(",
+            "Ljava/lang/Class<",
+            "TE;>;",
+            "Lio/realm/Realm;",
+            "Lorg/json/JSONObject;",
+            "Z)TE;"
+        }
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Lorg/json/JSONException;
+        }
+    .end annotation
+
+    .line 148
+    .local p1, "clazz":Ljava/lang/Class;, "Ljava/lang/Class<TE;>;"
+    invoke-direct {p0, p1}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 149
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1, p2, p3, p4}, Lio/realm/internal/RealmProxyMediator;->createOrUpdateUsingJsonObject(Ljava/lang/Class;Lio/realm/Realm;Lorg/json/JSONObject;Z)Lio/realm/RealmModel;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public createUsingJsonStream(Ljava/lang/Class;Lio/realm/Realm;Landroid/util/JsonReader;)Lio/realm/RealmModel;
+    .registers 5
+    .param p2, "realm"    # Lio/realm/Realm;
+    .param p3, "reader"    # Landroid/util/JsonReader;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<E::",
+            "Lio/realm/RealmModel;",
+            ">(",
+            "Ljava/lang/Class<",
+            "TE;>;",
+            "Lio/realm/Realm;",
+            "Landroid/util/JsonReader;",
+            ")TE;"
+        }
+    .end annotation
+
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/io/IOException;
+        }
+    .end annotation
+
+    .line 154
+    .local p1, "clazz":Ljava/lang/Class;, "Ljava/lang/Class<TE;>;"
+    invoke-direct {p0, p1}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 155
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1, p2, p3}, Lio/realm/internal/RealmProxyMediator;->createUsingJsonStream(Ljava/lang/Class;Lio/realm/Realm;Landroid/util/JsonReader;)Lio/realm/RealmModel;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public getExpectedObjectSchemaInfoMap()Ljava/util/Map;
+    .registers 6
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()",
+            "Ljava/util/Map<",
+            "Ljava/lang/Class<",
+            "+",
+            "Lio/realm/RealmModel;",
+            ">;",
+            "Lio/realm/internal/OsObjectSchemaInfo;",
+            ">;"
+        }
+    .end annotation
+
+    .line 77
+    new-instance v0, Ljava/util/HashMap;
+
+    invoke-direct {v0}, Ljava/util/HashMap;-><init>()V
+
+    .line 80
+    .local v0, "infoMap":Ljava/util/Map;, "Ljava/util/Map<Ljava/lang/Class<+Lio/realm/RealmModel;>;Lio/realm/internal/OsObjectSchemaInfo;>;"
+    iget-object v1, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v1}, Lio/realm/internal/RealmProxyMediator;->getExpectedObjectSchemaInfoMap()Ljava/util/Map;
+
+    move-result-object v1
+
+    invoke-interface {v1}, Ljava/util/Map;->entrySet()Ljava/util/Set;
+
+    move-result-object v1
+
+    invoke-interface {v1}, Ljava/util/Set;->iterator()Ljava/util/Iterator;
+
+    move-result-object v1
+
+    :goto_13
+    invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_3b
+
+    invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Ljava/util/Map$Entry;
+
+    .line 81
+    .local v2, "entry":Ljava/util/Map$Entry;, "Ljava/util/Map$Entry<Ljava/lang/Class<+Lio/realm/RealmModel;>;Lio/realm/internal/OsObjectSchemaInfo;>;"
+    iget-object v3, p0, Lio/realm/internal/modules/FilterableMediator;->allowedClasses:Ljava/util/Set;
+
+    invoke-interface {v2}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;
+
+    move-result-object v4
+
+    invoke-interface {v3, v4}, Ljava/util/Set;->contains(Ljava/lang/Object;)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_3a
+
+    .line 82
+    invoke-interface {v2}, Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;
+
+    move-result-object v3
+
+    check-cast v3, Ljava/lang/Class;
+
+    invoke-interface {v2}, Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;
+
+    move-result-object v4
+
+    check-cast v4, Lio/realm/internal/OsObjectSchemaInfo;
+
+    invoke-interface {v0, v3, v4}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+
+    .line 84
+    .end local v2    # "entry":Ljava/util/Map$Entry;, "Ljava/util/Map$Entry<Ljava/lang/Class<+Lio/realm/RealmModel;>;Lio/realm/internal/OsObjectSchemaInfo;>;"
+    :cond_3a
+    goto :goto_13
+
+    .line 85
+    :cond_3b
+    return-object v0
+.end method
+
+.method public getModelClasses()Ljava/util/Set;
+    .registers 2
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()",
+            "Ljava/util/Set<",
+            "Ljava/lang/Class<",
+            "+",
+            "Lio/realm/RealmModel;",
+            ">;>;"
+        }
+    .end annotation
+
+    .line 113
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->allowedClasses:Ljava/util/Set;
+
+    return-object v0
+.end method
+
+.method protected getSimpleClassNameImpl(Ljava/lang/Class;)Ljava/lang/String;
+    .registers 3
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/Class<",
+            "+",
+            "Lio/realm/RealmModel;",
+            ">;)",
+            "Ljava/lang/String;"
+        }
+    .end annotation
+
+    .line 96
+    .local p1, "clazz":Ljava/lang/Class;, "Ljava/lang/Class<+Lio/realm/RealmModel;>;"
+    invoke-direct {p0, p1}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 97
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1}, Lio/realm/internal/RealmProxyMediator;->getSimpleClassName(Ljava/lang/Class;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public insert(Lio/realm/Realm;Lio/realm/RealmModel;Ljava/util/Map;)V
+    .registers 5
+    .param p1, "realm"    # Lio/realm/Realm;
+    .param p2, "object"    # Lio/realm/RealmModel;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lio/realm/Realm;",
+            "Lio/realm/RealmModel;",
+            "Ljava/util/Map<",
+            "Lio/realm/RealmModel;",
+            "Ljava/lang/Long;",
+            ">;)V"
+        }
+    .end annotation
+
+    .line 124
+    .local p3, "cache":Ljava/util/Map;, "Ljava/util/Map<Lio/realm/RealmModel;Ljava/lang/Long;>;"
+    invoke-virtual {p2}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lio/realm/internal/Util;->getOriginalModelClass(Ljava/lang/Class;)Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-direct {p0, v0}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 125
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1, p2, p3}, Lio/realm/internal/RealmProxyMediator;->insert(Lio/realm/Realm;Lio/realm/RealmModel;Ljava/util/Map;)V
+
+    .line 126
+    return-void
+.end method
+
+.method public insert(Lio/realm/Realm;Ljava/util/Collection;)V
+    .registers 4
+    .param p1, "realm"    # Lio/realm/Realm;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lio/realm/Realm;",
+            "Ljava/util/Collection<",
+            "+",
+            "Lio/realm/RealmModel;",
+            ">;)V"
+        }
+    .end annotation
+
+    .line 130
+    .local p2, "objects":Ljava/util/Collection;, "Ljava/util/Collection<+Lio/realm/RealmModel;>;"
+    invoke-interface {p2}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lio/realm/RealmModel;
+
+    invoke-virtual {v0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lio/realm/internal/Util;->getOriginalModelClass(Ljava/lang/Class;)Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-direct {p0, v0}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 131
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1, p2}, Lio/realm/internal/RealmProxyMediator;->insert(Lio/realm/Realm;Ljava/util/Collection;)V
+
+    .line 132
+    return-void
+.end method
+
+.method public insertOrUpdate(Lio/realm/Realm;Lio/realm/RealmModel;Ljava/util/Map;)V
+    .registers 5
+    .param p1, "realm"    # Lio/realm/Realm;
+    .param p2, "object"    # Lio/realm/RealmModel;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lio/realm/Realm;",
+            "Lio/realm/RealmModel;",
+            "Ljava/util/Map<",
+            "Lio/realm/RealmModel;",
+            "Ljava/lang/Long;",
+            ">;)V"
+        }
+    .end annotation
+
+    .line 136
+    .local p3, "cache":Ljava/util/Map;, "Ljava/util/Map<Lio/realm/RealmModel;Ljava/lang/Long;>;"
+    invoke-virtual {p2}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lio/realm/internal/Util;->getOriginalModelClass(Ljava/lang/Class;)Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-direct {p0, v0}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 137
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1, p2, p3}, Lio/realm/internal/RealmProxyMediator;->insertOrUpdate(Lio/realm/Realm;Lio/realm/RealmModel;Ljava/util/Map;)V
+
+    .line 138
+    return-void
+.end method
+
+.method public insertOrUpdate(Lio/realm/Realm;Ljava/util/Collection;)V
+    .registers 4
+    .param p1, "realm"    # Lio/realm/Realm;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lio/realm/Realm;",
+            "Ljava/util/Collection<",
+            "+",
+            "Lio/realm/RealmModel;",
+            ">;)V"
+        }
+    .end annotation
+
+    .line 142
+    .local p2, "objects":Ljava/util/Collection;, "Ljava/util/Collection<+Lio/realm/RealmModel;>;"
+    invoke-interface {p2}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Lio/realm/RealmModel;
+
+    invoke-virtual {v0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lio/realm/internal/Util;->getOriginalModelClass(Ljava/lang/Class;)Ljava/lang/Class;
+
+    move-result-object v0
+
+    invoke-direct {p0, v0}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 143
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0, p1, p2}, Lio/realm/internal/RealmProxyMediator;->insertOrUpdate(Lio/realm/Realm;Ljava/util/Collection;)V
+
+    .line 144
+    return-void
+.end method
+
+.method public newInstance(Ljava/lang/Class;Ljava/lang/Object;Lio/realm/internal/Row;Lio/realm/internal/ColumnInfo;ZLjava/util/List;)Lio/realm/RealmModel;
+    .registers 14
+    .param p2, "baseRealm"    # Ljava/lang/Object;
+    .param p3, "row"    # Lio/realm/internal/Row;
+    .param p4, "columnInfo"    # Lio/realm/internal/ColumnInfo;
+    .param p5, "acceptDefaultValue"    # Z
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<E::",
+            "Lio/realm/RealmModel;",
+            ">(",
+            "Ljava/lang/Class<",
+            "TE;>;",
+            "Ljava/lang/Object;",
+            "Lio/realm/internal/Row;",
+            "Lio/realm/internal/ColumnInfo;",
+            "Z",
+            "Ljava/util/List<",
+            "Ljava/lang/String;",
+            ">;)TE;"
+        }
+    .end annotation
+
+    .line 107
+    .local p1, "clazz":Ljava/lang/Class;, "Ljava/lang/Class<TE;>;"
+    .local p6, "excludeFields":Ljava/util/List;, "Ljava/util/List<Ljava/lang/String;>;"
+    invoke-direct {p0, p1}, Lio/realm/internal/modules/FilterableMediator;->checkSchemaHasClass(Ljava/lang/Class;)V
+
+    .line 108
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    move-object v1, p1
+
+    move-object v2, p2
+
+    move-object v3, p3
+
+    move-object v4, p4
+
+    move v5, p5
+
+    move-object v6, p6
+
+    invoke-virtual/range {v0 .. v6}, Lio/realm/internal/RealmProxyMediator;->newInstance(Ljava/lang/Class;Ljava/lang/Object;Lio/realm/internal/Row;Lio/realm/internal/ColumnInfo;ZLjava/util/List;)Lio/realm/RealmModel;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method public transformerApplied()Z
+    .registers 2
+
+    .line 167
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    if-nez v0, :cond_6
+
+    .line 168
+    const/4 v0, 0x1
+
+    return v0
+
+    .line 170
+    :cond_6
+    iget-object v0, p0, Lio/realm/internal/modules/FilterableMediator;->originalMediator:Lio/realm/internal/RealmProxyMediator;
+
+    invoke-virtual {v0}, Lio/realm/internal/RealmProxyMediator;->transformerApplied()Z
+
+    move-result v0
+
+    return v0
+.end method

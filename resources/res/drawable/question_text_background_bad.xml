@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/question_layout_selected_bad"/>
+    <stroke
+        android:width="0dp"
+        android:color="#aed1f4"/>
+    <corners android:radius="30dp"/>
+    <padding
+        android:left="10dp"
+        android:top="3dp"
+        android:right="10dp"
+        android:bottom="3dp"/>
+</shape>

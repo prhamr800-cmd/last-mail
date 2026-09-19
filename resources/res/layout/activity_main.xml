@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/appbar_main"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/activityMain_viewPager_mainPages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="rtl"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    <com.github.jorgecastilloprz.FABProgressCircle
+        android:layout_gravity="end|bottom"
+        android:id="@+id/activityMain_fabProgressCircle_finalizingTripProgressCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:arcColor="@color/fabProgressWheel">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/activityMain_fab_finalizeTrip"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_checkmark_white"/>
+    </com.github.jorgecastilloprz.FABProgressCircle>
+    <View
+        android:id="@+id/dark_layer"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</android.support.design.widget.CoordinatorLayout>

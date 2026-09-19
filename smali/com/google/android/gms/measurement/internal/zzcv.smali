@@ -1,0 +1,10 @@
+###### Class com.google.android.gms.measurement.internal.zzcv (com.google.android.gms.measurement.internal.zzcv)
+.class public interface abstract Lcom/google/android/gms/measurement/internal/zzcv;
+.super Ljava/lang/Object;
+
+
+# virtual methods
+.method public abstract interceptEvent(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;J)V
+    .annotation build Landroid/support/annotation/WorkerThread;
+    .end annotation
+.end method

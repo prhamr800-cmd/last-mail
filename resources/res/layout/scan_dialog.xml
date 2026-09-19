@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="@drawable/scan_edit_text_background"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_margin="10dp"
+    android:weightSum="11">
+    <com.digikala.dms.view.custom.XeiEditText
+        android:textSize="12sp"
+        android:id="@+id/scanEditText"
+        android:background="@android:color/transparent"
+        android:padding="8dp"
+        android:focusable="true"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:hint="@string/search_by_barcode"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"
+        android:maxLength="50"
+        android:layout_weight="10"
+        android:inputType="text"
+        android:layoutDirection="ltr"/>
+    <ImageButton
+        android:id="@+id/assigned_shipment_fragment_scanDialog_btn"
+        android:background="@drawable/ic_barcode_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:scaleType="centerCrop"
+        android:layout_weight="1"/>
+</LinearLayout>

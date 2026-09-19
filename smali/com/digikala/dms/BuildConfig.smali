@@ -1,0 +1,56 @@
+###### Class com.digikala.dms.BuildConfig (com.digikala.dms.BuildConfig)
+.class public final Lcom/digikala/dms/BuildConfig;
+.super Ljava/lang/Object;
+.source "BuildConfig.java"
+
+
+# static fields
+.field public static final API_VERSION:I = 0x15
+
+.field public static final APPLICATION_ID:Ljava/lang/String; = "com.digikala.dms"
+
+.field public static final BUILD_TYPE:Ljava/lang/String; = "release"
+
+.field public static final DEBUG:Z
+
+.field public static final ENABLED_ANSWERS:Z = true
+
+.field public static final ENABLED_APPSEE:Z = false
+
+.field public static final ENABLED_CRASHLYTICS:Z = true
+
+.field public static final FLAVOR:Ljava/lang/String; = ""
+
+.field public static final URL_WEBAPI:Ljava/lang/String; = "https://lg.digikala.com/dms-api/"
+
+.field public static final URL_WEBAPI_DRIVER_TRACK:Ljava/lang/String; = "dmst.digikala.com"
+
+.field public static final VERSION_CODE:I = 0x15
+
+.field public static final VERSION_NAME:Ljava/lang/String; = "2.2.3"
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .registers 1
+
+    .line 7
+    const-string/jumbo v0, "true"
+
+    invoke-static {v0}, Ljava/lang/Boolean;->parseBoolean(Ljava/lang/String;)Z
+
+    move-result v0
+
+    sput-boolean v0, Lcom/digikala/dms/BuildConfig;->DEBUG:Z
+
+    return-void
+.end method
+
+.method public constructor <init>()V
+    .registers 1
+
+    .line 6
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method

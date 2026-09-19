@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <com.digikala.dms.view.custom.XeiTextView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:textSize="@dimen/textSize_deliveryName"
+        android:textColor="#ff0000"
+        android:gravity="center"
+        android:id="@+id/tab_layout_name_count"
+        android:background="@drawable/circle_red_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="45"
+        app:locale="auto"/>
+    <com.digikala.dms.view.custom.XeiTextView
+        android:textSize="@dimen/textSize_tabs_title"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:id="@+id/tab_layout_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="همه سفارشات"
+        app:locale="auto"/>
+</LinearLayout>

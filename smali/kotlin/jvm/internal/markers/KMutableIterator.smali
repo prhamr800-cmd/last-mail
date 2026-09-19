@@ -1,0 +1,7 @@
+###### Class kotlin.jvm.internal.markers.KMutableIterator (kotlin.jvm.internal.markers.KMutableIterator)
+.class public interface abstract Lkotlin/jvm/internal/markers/KMutableIterator;
+.super Ljava/lang/Object;
+.source "KMutableIterator.java"
+
+# interfaces
+.implements Lkotlin/jvm/internal/markers/KMappedMarker;

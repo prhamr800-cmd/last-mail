@@ -1,0 +1,28 @@
+###### Class com.google.firebase.FirebaseTooManyRequestsException (com.google.firebase.FirebaseTooManyRequestsException)
+.class public Lcom/google/firebase/FirebaseTooManyRequestsException;
+.super Lcom/google/firebase/FirebaseException;
+.source "com.google.firebase:firebase-common@@16.0.2"
+
+
+# annotations
+.annotation build Lcom/google/firebase/annotations/PublicApi;
+.end annotation
+
+
+# direct methods
+.method public constructor <init>(Ljava/lang/String;)V
+    .registers 2
+    .param p1, "message"    # Ljava/lang/String;
+    .annotation build Lcom/google/firebase/annotations/PublicApi;
+    .end annotation
+
+    .line 28
+    nop
+
+    .end local p1    # "message":Ljava/lang/String;
+    invoke-direct {p0, p1}, Lcom/google/firebase/FirebaseException;-><init>(Ljava/lang/String;)V
+
+    .line 29
+    .end local p0    # "this":Lcom/google/firebase/FirebaseTooManyRequestsException;
+    return-void
+.end method
